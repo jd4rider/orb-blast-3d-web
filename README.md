@@ -52,8 +52,13 @@ python3 -m http.server 8000 --directory site   # http://127.0.0.1:8000/play/
 
 ## Limits worth knowing
 
-- This is the gameplay-foundation build: 5 hand-authored levels, no progression save,
-  no audio and no Little Joy Arcade account layer yet. `saveKey` is empty on purpose.
+- Progress is the furthest level unlocked, kept in Unity's PlayerPrefs
+  (`orbblast.furthestLevel`). `prepare-site.mjs` enables
+  `autoSyncPersistentDataPath` so every save reaches `/idbfs` as it is written, which
+  is what `public/arcade-unity.js` hands to the arcade account.
+- `saveKey` stays empty: that field names a Web Storage key, and this game saves
+  through Unity rather than `localStorage`.
+- No audio yet.
 - The aim guide draws every rail bounce at full strength, so a shallow aim paints a
   staircase across the whole board. It is truthful - the flight uses the same plan.
 - There is no reflection probe or environment map, so the spheres read as lit coloured
